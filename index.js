@@ -16,12 +16,11 @@ async function run() {
       const database = client.db("User_Collection");
       const userCollectiion = database.collection("users");
       // create a document to insert
-      const doc = {
-        name:"Jamal Sheakh",
-        email : "alrabbism@gmail.com"
-      }
-      const result = await userCollectiion.insertOne(doc);
-      console.log(`A document was inserted with the _id: ${result.insertedId}`);
+     app.get('/users',(req,res) =>{
+       const cursor = userCollectiion.find({});
+       const user =await cursor.toArray()
+       res.send(user);
+     })
     } finally {
     //   await client.close();
     }
